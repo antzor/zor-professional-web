@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZOR Professional - Premium Paper Solutions</title>
+  <meta name="description" content="ZOR Professional - Zagreb-based manufacturer of premium toilet paper, paper towels, and folded paper solutions. Serving distributors across Europe with whitelabel and branded products." />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#2D2D7F",
+            "primary-light": "#4A4AA0",
+            "primary-dark": "#1E1E5A",
+            "accent": "#E8E8F5",
+            "gray-warm": "#F8F8FA",
+            "gray-border": "#E5E7EB",
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "1rem",
+            "3xl": "1.5rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    /* Scroll animations */
+    .animate-fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .animate-fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .animate-fade-in {
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .animate-fade-in.visible {
+      opacity: 1;
+    }
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-white text-gray-900">
+  <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
