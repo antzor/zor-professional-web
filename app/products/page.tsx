@@ -8,6 +8,10 @@ export const metadata: Metadata = {
 }
 
 export default async function ProductsPage() {
-  const products = await getRegularProducts().catch(() => [])
+  const products = await getRegularProducts().catch((err) => {
+    console.error('[ProductsPage] Failed to fetch products:', err.message)
+    return []
+  })
+  console.log('[ProductsPage] Fetched products:', products.length)
   return <ProductsContent products={products} />
 }
