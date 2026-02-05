@@ -1,7 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
-import { getBlogPost } from '../../data/blogContent';
-import { getProductContent } from '../../data/productContent';
+import { useBlogPost } from '../../hooks/useSanityBlog';
 import SEOHead from '../seo/SEOHead';
 import { getCanonicalUrl, generateBlogPostSchema, generateBreadcrumbSchema } from '../../lib/seo';
 
@@ -9,12 +8,25 @@ export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
   const { language, t } = useLanguage();
 
+  // Use Sanity hook with fallback to static data
+  const { post, isLoading } = useBlogPost(slug || '');
+
   if (!slug) {
     return <Navigate to="/blog" replace />;
   }
 
-  const post = getBlogPost(slug);
+  // Show loading state while fetching
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <span className="material-symbols-outlined animate-spin text-primary text-4xl">
+          progress_activity
+        </span>
+      </div>
+    );
+  }
 
+  // Redirect if no post found after loading
   if (!post) {
     return <Navigate to="/blog" replace />;
   }
@@ -58,10 +70,10 @@ export default function BlogPostPage() {
         jsonLd={[blogPostSchema, breadcrumbSchema]}
       />
 
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-white">
         {/* Breadcrumbs */}
         <div className="bg-white border-b">
-          <div className="container mx-auto px-4 py-4">
+          <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4">
             <div className="flex items-center gap-2 text-sm text-gray-600">
               <Link to="/" className="hover:text-primary transition-colors">
                 {t('nav.home')}
@@ -78,7 +90,7 @@ export default function BlogPostPage() {
 
         {/* Article Header */}
         <div className="bg-white">
-          <div className="container mx-auto px-4 py-12">
+          <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12">
             <div className="max-w-4xl mx-auto">
               {/* Category Badge */}
               <div className="mb-4">
@@ -128,7 +140,7 @@ export default function BlogPostPage() {
         </div>
 
         {/* Article Content */}
-        <div className="container mx-auto px-4 py-12">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12">
           <div className="max-w-4xl mx-auto">
             <div
               className="prose prose-lg max-w-none prose-headings:font-bold prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4 prose-p:text-gray-700 prose-p:leading-relaxed prose-li:text-gray-700 prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900"
@@ -158,41 +170,27 @@ export default function BlogPostPage() {
         {/* Related Products */}
         {post.relatedProducts && post.relatedProducts.length > 0 && (
           <div className="bg-white py-12">
-            <div className="container mx-auto px-4">
+            <div className="max-w-7xl mx-auto px-6 lg:px-10">
               <div className="max-w-4xl mx-auto">
                 <h2 className="text-3xl font-bold mb-8 text-gray-900">
                   {t('blog.relatedProducts')}
                 </h2>
                 <div className="grid md:grid-cols-3 gap-6">
-                  {post.relatedProducts.map(handle => {
-                    const productContent = getProductContent(handle);
-                    return (
-                      <Link
-                        key={handle}
-                        to={`/products/${handle}`}
-                        className="block p-6 border-2 border-gray-200 rounded-lg hover:border-primary hover:shadow-lg transition-all duration-200"
-                      >
-                        <div className="flex items-center gap-2 text-primary mb-2">
-                          <span className="material-symbols-outlined">inventory_2</span>
-                          <span className="font-medium">Product</span>
-                        </div>
-                        <h3 className="font-semibold text-gray-900 capitalize">
-                          {handle.replace(/-/g, ' ')}
-                        </h3>
-                        {productContent?.badge?.label && (
-                          <span className={`inline-block mt-2 px-2 py-1 text-xs rounded ${
-                            productContent.badge.color === 'green'
-                              ? 'bg-green-100 text-green-800'
-                              : productContent.badge.color === 'blue'
-                              ? 'bg-blue-100 text-blue-800'
-                              : 'bg-yellow-100 text-yellow-800'
-                          }`}>
-                            {productContent.badge.label[language]}
-                          </span>
-                        )}
-                      </Link>
-                    );
-                  })}
+                  {post.relatedProducts.map(handle => (
+                    <Link
+                      key={handle}
+                      to={`/products/${handle}`}
+                      className="block p-6 border-2 border-gray-200 rounded-lg hover:border-primary hover:shadow-lg transition-all duration-200"
+                    >
+                      <div className="flex items-center gap-2 text-primary mb-2">
+                        <span className="material-symbols-outlined">inventory_2</span>
+                        <span className="font-medium">{t('nav.products')}</span>
+                      </div>
+                      <h3 className="font-semibold text-gray-900 capitalize">
+                        {handle.replace(/-/g, ' ')}
+                      </h3>
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>
@@ -200,7 +198,7 @@ export default function BlogPostPage() {
         )}
 
         {/* Back to Blog */}
-        <div className="container mx-auto px-4 py-12">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12">
           <div className="max-w-4xl mx-auto">
             <Link
               to="/blog"

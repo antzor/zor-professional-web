@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
-import { getAllBlogPosts, getAllCategories, getFeaturedBlogPosts } from '../../data/blogContent';
+import { useBlogPosts, useFeaturedPosts, useBlogCategories } from '../../hooks/useSanityBlog';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import BlogCard from '../blog/BlogCard';
 import BlogCategoryFilter from '../blog/BlogCategoryFilter';
 import SEOHead from '../seo/SEOHead';
@@ -8,12 +9,14 @@ import { getCanonicalUrl } from '../../lib/seo';
 
 export default function BlogPage() {
   const { language, t } = useLanguage();
+  const headerRef = useScrollAnimation();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const allPosts = getAllBlogPosts();
-  const featuredPosts = getFeaturedBlogPosts(3);
-  const categories = getAllCategories(language);
+  // Use Sanity hooks for blog data
+  const { posts: allPosts, isLoading } = useBlogPosts();
+  const { posts: featuredPosts } = useFeaturedPosts(3);
+  const categories = useBlogCategories(language);
 
   // Filter posts based on active category and search query
   const filteredPosts = useMemo(() => {
@@ -55,20 +58,20 @@ export default function BlogPage() {
         ]}
       />
 
-      <div className="min-h-screen bg-gray-50">
-        {/* Hero Section */}
-        <div className="bg-gradient-to-r from-primary to-primary-dark text-white py-16">
-          <div className="container mx-auto px-4">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+      <div className="min-h-screen bg-white">
+        {/* Page Header */}
+        <div className="bg-gray-warm border-b border-gray-border">
+          <div ref={headerRef} className="animate-fade-up max-w-7xl mx-auto px-6 lg:px-10 py-16">
+            <h1 className="text-gray-900 text-4xl font-black tracking-tight">
               {t('blog.title')}
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl">
+            <p className="text-gray-600 text-lg mt-3 max-w-2xl">
               {t('blog.subtitle')}
             </p>
           </div>
         </div>
 
-        <div className="container mx-auto px-4 py-12">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-10">
           {/* Search Bar */}
           <div className="mb-8">
             <div className="relative max-w-2xl mx-auto">
@@ -85,8 +88,17 @@ export default function BlogPage() {
             </div>
           </div>
 
+          {/* Loading State */}
+          {isLoading && (
+            <div className="text-center py-16">
+              <span className="material-symbols-outlined animate-spin text-primary text-4xl">
+                progress_activity
+              </span>
+            </div>
+          )}
+
           {/* Featured Posts (only show when no filters active) */}
-          {!activeCategory && !searchQuery && featuredPosts.length > 0 && (
+          {!isLoading && !activeCategory && !searchQuery && featuredPosts.length > 0 && (
             <div className="mb-16">
               <h2 className="text-3xl font-bold mb-8 text-gray-900">
                 {t('blog.featured')}
@@ -100,33 +112,37 @@ export default function BlogPage() {
           )}
 
           {/* Category Filter */}
-          <div className="mb-8">
-            <BlogCategoryFilter
-              categories={categories}
-              activeCategory={activeCategory}
-              onCategoryChange={setActiveCategory}
-            />
-          </div>
+          {!isLoading && (
+            <div className="mb-8">
+              <BlogCategoryFilter
+                categories={categories}
+                activeCategory={activeCategory}
+                onCategoryChange={setActiveCategory}
+              />
+            </div>
+          )}
 
           {/* All Posts Grid */}
-          <div>
-            {filteredPosts.length > 0 ? (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredPosts.map(post => (
-                  <BlogCard key={post.slug} post={post} />
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-16">
-                <span className="material-symbols-outlined text-6xl text-gray-300 mb-4">
-                  article
-                </span>
-                <p className="text-xl text-gray-500">
-                  {t('blog.noResults')}
-                </p>
-              </div>
-            )}
-          </div>
+          {!isLoading && (
+            <div>
+              {filteredPosts.length > 0 ? (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {filteredPosts.map(post => (
+                    <BlogCard key={post.slug} post={post} />
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-16">
+                  <span className="material-symbols-outlined text-6xl text-gray-300 mb-4">
+                    article
+                  </span>
+                  <p className="text-xl text-gray-500">
+                    {t('blog.noResults')}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </>

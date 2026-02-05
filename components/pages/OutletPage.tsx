@@ -64,20 +64,20 @@ const OutletPage: React.FC = () => {
   return (
     <div className="bg-white min-h-screen">
       {/* Page Header */}
-      <div className="bg-primary">
+      <div className="bg-gray-warm border-b border-gray-border">
         <div ref={headerRef} className="animate-fade-up max-w-7xl mx-auto px-6 lg:px-10 py-16">
           <div className="flex items-center gap-3 mb-4">
             <span className="bg-red-600 text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
               {t('outlet.badge')}
             </span>
             {maxDiscount > 0 && (
-              <span className="text-red-400 font-bold text-sm">
+              <span className="text-red-600 font-bold text-sm">
                 {t('home.outlet.upTo')} {maxDiscount}% {t('home.outlet.off')}
               </span>
             )}
           </div>
-          <h1 className="text-white text-4xl lg:text-5xl font-black tracking-tight">{t('outlet.title')}</h1>
-          <p className="text-white/80 text-lg mt-3 max-w-2xl">{t('outlet.subtitle')}</p>
+          <h1 className="text-gray-900 text-4xl font-black tracking-tight">{t('outlet.title')}</h1>
+          <p className="text-gray-600 text-lg mt-3 max-w-2xl">{t('outlet.subtitle')}</p>
         </div>
       </div>
 

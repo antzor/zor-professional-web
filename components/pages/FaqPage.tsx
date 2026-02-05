@@ -1,22 +1,13 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
-
-const faqKeys = [
-  { q: 'faq.q1', a: 'faq.a1' },
-  { q: 'faq.q2', a: 'faq.a2' },
-  { q: 'faq.q3', a: 'faq.a3' },
-  { q: 'faq.q4', a: 'faq.a4' },
-  { q: 'faq.q5', a: 'faq.a5' },
-  { q: 'faq.q6', a: 'faq.a6' },
-  { q: 'faq.q7', a: 'faq.a7' },
-  { q: 'faq.q8', a: 'faq.a8' },
-];
+import { useFaqItems } from '../../hooks/useSanityFaq';
 
 const FaqPage: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const headerRef = useScrollAnimation();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { items, isLoading, error } = useFaqItems();
 
   const toggle = (idx: number) => {
     setOpenIndex(openIndex === idx ? null : idx);
@@ -35,30 +26,44 @@ const FaqPage: React.FC = () => {
       {/* FAQ Accordion */}
       <section className="py-16">
         <div className="max-w-3xl mx-auto px-6 lg:px-10">
-          <div className="flex flex-col divide-y divide-gray-border">
-            {faqKeys.map((faq, idx) => (
-              <div key={idx}>
-                <button
-                  onClick={() => toggle(idx)}
-                  className="w-full flex items-center justify-between py-5 text-left group"
-                >
-                  <span className="text-gray-900 font-semibold pr-4 group-hover:text-primary transition-colors">
-                    {t(faq.q)}
-                  </span>
-                  <span className={`material-symbols-outlined text-gray-400 transition-transform shrink-0 ${openIndex === idx ? 'rotate-180' : ''}`}>
-                    expand_more
-                  </span>
-                </button>
-                <div
-                  className={`overflow-hidden transition-all duration-300 ${
-                    openIndex === idx ? 'max-h-96 pb-5' : 'max-h-0'
-                  }`}
-                >
-                  <p className="text-gray-600 text-sm leading-relaxed">{t(faq.a)}</p>
+          {isLoading ? (
+            <div className="flex justify-center py-12">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            </div>
+          ) : error ? (
+            <div className="text-center py-12">
+              <p className="text-gray-600">{error}</p>
+            </div>
+          ) : items.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-gray-600">{t('faq.noItems')}</p>
+            </div>
+          ) : (
+            <div className="flex flex-col divide-y divide-gray-border">
+              {items.map((faq, idx) => (
+                <div key={idx}>
+                  <button
+                    onClick={() => toggle(idx)}
+                    className="w-full flex items-center justify-between py-5 text-left group"
+                  >
+                    <span className="text-gray-900 font-semibold pr-4 group-hover:text-primary transition-colors">
+                      {faq.question[language]}
+                    </span>
+                    <span className={`material-symbols-outlined text-gray-400 transition-transform shrink-0 ${openIndex === idx ? 'rotate-180' : ''}`}>
+                      expand_more
+                    </span>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ${
+                      openIndex === idx ? 'max-h-96 pb-5' : 'max-h-0'
+                    }`}
+                  >
+                    <p className="text-gray-600 text-sm leading-relaxed">{faq.answer[language]}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </div>

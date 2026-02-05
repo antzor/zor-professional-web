@@ -4,9 +4,8 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useCart } from '../../context/CartContext';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { getProductByHandle, getRelatedProducts, isShopifyConfigured } from '../../lib/shopify';
-import { getProductContent } from '../../data/productContent';
+import { useProductContent } from '../../hooks/useSanityProductContent';
 import type { ProductDetail, Product } from '../../types/shopify';
-import type { ProductContent } from '../../types/productContent';
 
 // Section components
 import ProductFeatures from '../sections/ProductFeatures';
@@ -23,7 +22,6 @@ const ProductDetailPage: React.FC = () => {
   const headerRef = useScrollAnimation();
 
   const [product, setProduct] = useState<ProductDetail | null>(null);
-  const [content, setContent] = useState<ProductContent | null>(null);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -31,7 +29,10 @@ const ProductDetailPage: React.FC = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
-  // Fetch product by handle
+  // Fetch product content from Sanity
+  const { content } = useProductContent(handle || '');
+
+  // Fetch product by handle from Shopify
   useEffect(() => {
     const fetchProduct = async () => {
       if (!handle) {
@@ -59,10 +60,6 @@ const ProductDetailPage: React.FC = () => {
         setProduct(shopifyProduct);
         setSelectedVariantId(shopifyProduct.variants[0]?.id || '');
         setError(null);
-
-        // Get local content for this product
-        const localContent = getProductContent(handle);
-        setContent(localContent);
 
         // Fetch related products
         const related = await getRelatedProducts(handle, shopifyProduct.tags, 4);
