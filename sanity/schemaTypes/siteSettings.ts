@@ -104,6 +104,30 @@ export default defineType({
       title: 'Business Hours (EN)',
       type: 'string',
     }),
+    defineField({
+      name: 'footerDescriptionHr',
+      title: 'Footer Description (HR)',
+      type: 'text',
+      rows: 3,
+    }),
+    defineField({
+      name: 'footerDescriptionEn',
+      title: 'Footer Description (EN)',
+      type: 'text',
+      rows: 3,
+    }),
+    defineField({
+      name: 'footerCopyrightHr',
+      title: 'Footer Copyright (HR)',
+      type: 'string',
+      description: 'Use {year} for dynamic year',
+    }),
+    defineField({
+      name: 'footerCopyrightEn',
+      title: 'Footer Copyright (EN)',
+      type: 'string',
+      description: 'Use {year} for dynamic year',
+    }),
   ],
   preview: {
     prepare() {

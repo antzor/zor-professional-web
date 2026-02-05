@@ -15,7 +15,8 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
-*.local
+.next
+out
 
 # Separate project folder
 zor-pro-app

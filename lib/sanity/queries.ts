@@ -171,5 +171,116 @@ export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
   contactPhone,
   contactAddress,
   businessHoursHr,
-  businessHoursEn
+  businessHoursEn,
+  footerDescriptionHr,
+  footerDescriptionEn,
+  footerCopyrightHr,
+  footerCopyrightEn
+}`
+
+// Home Page (singleton)
+export const HOME_PAGE_QUERY = `*[_type == "homePage"][0] {
+  outletSectionTitleHr,
+  outletSectionTitleEn,
+  outletSectionSubtitleHr,
+  outletSectionSubtitleEn,
+  outletSustainabilityHr,
+  outletSustainabilityEn,
+  categoriesSectionTitleHr,
+  categoriesSectionTitleEn,
+  categoriesSectionSubtitleHr,
+  categoriesSectionSubtitleEn,
+  whyChooseTitleHr,
+  whyChooseTitleEn,
+  whyChooseSubtitleHr,
+  whyChooseSubtitleEn,
+  whyChooseItems,
+  ctaTitleHr,
+  ctaTitleEn,
+  ctaSubtitleHr,
+  ctaSubtitleEn,
+  ctaButtonTextHr,
+  ctaButtonTextEn,
+  ctaButtonLink,
+  metaTitleHr,
+  metaTitleEn,
+  metaDescriptionHr,
+  metaDescriptionEn,
+  keywords
+}`
+
+// About Page (singleton)
+export const ABOUT_PAGE_QUERY = `*[_type == "aboutPage"][0] {
+  titleHr,
+  titleEn,
+  subtitleHr,
+  subtitleEn,
+  storyParagraphs,
+  factoryImage,
+  valuesSectionTitleHr,
+  valuesSectionTitleEn,
+  values,
+  locationTitleHr,
+  locationTitleEn,
+  locationDescriptionHr,
+  locationDescriptionEn,
+  metaTitleHr,
+  metaTitleEn,
+  metaDescriptionHr,
+  metaDescriptionEn
+}`
+
+// Whitelabel Page (singleton)
+export const WHITELABEL_PAGE_QUERY = `*[_type == "whitelabelPage"][0] {
+  titleHr,
+  titleEn,
+  subtitleHr,
+  subtitleEn,
+  introHr,
+  introEn,
+  steps,
+  benefitsTitleHr,
+  benefitsTitleEn,
+  benefits,
+  ctaTitleHr,
+  ctaTitleEn,
+  ctaButtonLink,
+  metaTitleHr,
+  metaTitleEn,
+  metaDescriptionHr,
+  metaDescriptionEn
+}`
+
+// Contact Page (singleton)
+export const CONTACT_PAGE_QUERY = `*[_type == "contactPage"][0] {
+  titleHr,
+  titleEn,
+  subtitleHr,
+  subtitleEn,
+  infoTitleHr,
+  infoTitleEn,
+  metaTitleHr,
+  metaTitleEn,
+  metaDescriptionHr,
+  metaDescriptionEn
+}`
+
+// Navigation (singleton)
+export const NAVIGATION_QUERY = `*[_type == "navigation"][0] {
+  mainMenuItems,
+  ctaButtonTextHr,
+  ctaButtonTextEn,
+  ctaButtonLink
+}`
+
+// Product Categories
+export const PRODUCT_CATEGORIES_QUERY = `*[_type == "productCategory"] | order(order asc) {
+  "slug": slug.current,
+  nameHr,
+  nameEn,
+  descriptionHr,
+  descriptionEn,
+  icon,
+  image,
+  order
 }`
