@@ -157,16 +157,8 @@ export const BANNER_BY_LOCATION_QUERY = `*[_type == "banner" && location == $loc
   backgroundImage
 }`
 
-// Site Settings (singleton)
+// Site Settings (singleton) — global contact + footer only
 export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
-  heroTaglineHr,
-  heroTaglineEn,
-  heroTitleHr,
-  heroTitleEn,
-  heroSubtitleHr,
-  heroSubtitleEn,
-  heroImage,
-  stats,
   contactEmail,
   contactPhone,
   contactAddress,
@@ -178,8 +170,16 @@ export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
   footerCopyrightEn
 }`
 
-// Home Page (singleton)
+// Home Page (singleton) — all homepage content including hero + stats
 export const HOME_PAGE_QUERY = `*[_type == "homePage"][0] {
+  heroTaglineHr,
+  heroTaglineEn,
+  heroTitleHr,
+  heroTitleEn,
+  heroSubtitleHr,
+  heroSubtitleEn,
+  heroImage,
+  stats,
   outletSectionTitleHr,
   outletSectionTitleEn,
   outletSectionSubtitleHr,

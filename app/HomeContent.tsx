@@ -8,12 +8,11 @@ import type { ShopifyProduct } from '@/lib/shopify/products'
 
 interface HomeContentProps {
   homePage: any
-  siteSettings: any
   categories: any[]
   outletProducts: ShopifyProduct[]
 }
 
-export default function HomeContent({ homePage, siteSettings, categories, outletProducts }: HomeContentProps) {
+export default function HomeContent({ homePage, categories, outletProducts }: HomeContentProps) {
   const { t, language } = useLanguage()
   const statsRef = useScrollAnimation()
   const outletRef = useScrollAnimation()
@@ -24,8 +23,8 @@ export default function HomeContent({ homePage, siteSettings, categories, outlet
 
   const l = (hr?: string, en?: string) => (language === 'hr' ? hr : en) || en || hr || ''
 
-  // Stats from siteSettings
-  const stats = siteSettings?.stats || [
+  // Stats from homePage
+  const stats = homePage?.stats || [
     { valueKey: '15+', labelKey: 'home.stats.countries' },
     { valueKey: '30+', labelKey: 'home.stats.products' },
     { valueKey: '500+', labelKey: 'home.stats.capacity' },
@@ -69,13 +68,13 @@ export default function HomeContent({ homePage, siteSettings, categories, outlet
             <div ref={animRef} className="animate-fade-up flex flex-col gap-8 max-w-2xl">
               <div className="flex flex-col gap-4">
                 <span className="text-white/80 font-bold tracking-widest text-xs uppercase">
-                  {l(siteSettings?.heroTaglineHr, siteSettings?.heroTaglineEn) || t('hero.tagline')}
+                  {l(homePage?.heroTaglineHr, homePage?.heroTaglineEn) || t('hero.tagline')}
                 </span>
                 <h1 className="text-white text-4xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight drop-shadow-lg">
-                  {l(siteSettings?.heroTitleHr, siteSettings?.heroTitleEn) || t('hero.title')}
+                  {l(homePage?.heroTitleHr, homePage?.heroTitleEn) || t('hero.title')}
                 </h1>
                 <p className="text-white/90 text-lg leading-relaxed max-w-xl drop-shadow-md">
-                  {l(siteSettings?.heroSubtitleHr, siteSettings?.heroSubtitleEn) || t('hero.subtitle')}
+                  {l(homePage?.heroSubtitleHr, homePage?.heroSubtitleEn) || t('hero.subtitle')}
                 </p>
               </div>
               <div className="flex flex-wrap gap-4">
