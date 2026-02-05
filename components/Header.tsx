@@ -29,6 +29,7 @@ const Header: React.FC<HeaderProps> = ({ transparent = false }) => {
 
   const navLinks = [
     { to: '/products', label: t('nav.products') },
+    { to: '/blog', label: t('nav.blog') },
     { to: '/outlet', label: t('nav.outlet'), highlight: true },
     { to: '/about', label: t('nav.about') },
     { to: '/whitelabel', label: t('nav.whitelabel') },

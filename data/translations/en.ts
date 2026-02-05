@@ -333,4 +333,23 @@ export const en: Record<string, string> = {
   'sections.reviews': 'reviews',
   'sections.fastDelivery': 'Fast Delivery',
   'sections.freeSamples': 'Free Samples',
+
+  // Blog
+  'nav.blog': 'Blog',
+  'nav.home': 'Home',
+  'blog.title': 'Blog & Resources',
+  'blog.subtitle': 'Expert insights on paper products, sustainability, and facility management.',
+  'blog.readMore': 'Read More',
+  'blog.readingTime': '{minutes} min read',
+  'blog.publishedOn': 'Published on',
+  'blog.updatedOn': 'Updated on',
+  'blog.byAuthor': 'By {author}',
+  'blog.category': 'Category',
+  'blog.tags': 'Tags',
+  'blog.relatedProducts': 'Related Products',
+  'blog.relatedPosts': 'You May Also Like',
+  'blog.allPosts': 'All Posts',
+  'blog.featured': 'Featured Articles',
+  'blog.noResults': 'No blog posts found.',
+  'blog.searchPlaceholder': 'Search articles...',
 };

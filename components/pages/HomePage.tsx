@@ -5,6 +5,8 @@ import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { categories } from '../../data/products';
 import { outletProducts } from '../../data/outletProducts';
 import Hero from '../Hero';
+import SEOHead from '../seo/SEOHead';
+import { getCanonicalUrl, generateOrganizationSchema, generateWebsiteSchema } from '../../lib/seo';
 
 const stats = [
   { valueKey: '15+', labelKey: 'home.stats.countries' },
@@ -33,6 +35,22 @@ const HomePage: React.FC = () => {
 
   return (
     <>
+      <SEOHead
+        title="ZOR Professional - Premium Paper Solutions Manufacturer Zagreb"
+        description="Zagreb-based manufacturer of premium toilet paper, paper towels, and folded paper solutions. Serving distributors across Europe with whitelabel and branded products. Direct from factory - best prices."
+        canonical={getCanonicalUrl('/')}
+        keywords={[
+          'paper manufacturer Zagreb',
+          'toilet paper manufacturer',
+          'paper towels wholesale',
+          'whitelabel paper products',
+          'paper distributor Europe',
+          'professional paper solutions',
+          'proizvođač papira Zagreb',
+          'toaletni papir veleprodaja'
+        ]}
+        jsonLd={[generateOrganizationSchema(), generateWebsiteSchema()]}
+      />
       <Hero />
 
       {/* Stats Bar */}
@@ -69,6 +87,8 @@ const HomePage: React.FC = () => {
                         src={topOutletDeals[0].image}
                         alt={t(topOutletDeals[0].nameKey)}
                         className="w-full h-full object-contain p-6 group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                        decoding="async"
                       />
                     ) : (
                       <span className="material-symbols-outlined text-gray-300 text-6xl">inventory_2</span>
@@ -148,6 +168,8 @@ const HomePage: React.FC = () => {
                       src={cat.image}
                       alt={t(cat.nameKey)}
                       className="w-full h-full object-contain p-6 group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                      decoding="async"
                     />
                   ) : (
                     <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">

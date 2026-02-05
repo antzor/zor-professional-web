@@ -333,4 +333,23 @@ export const hr: Record<string, string> = {
   'sections.reviews': 'recenzija',
   'sections.fastDelivery': 'Brza dostava',
   'sections.freeSamples': 'Besplatni uzorci',
+
+  // Blog
+  'nav.blog': 'Blog',
+  'nav.home': 'Početna',
+  'blog.title': 'Blog i resursi',
+  'blog.subtitle': 'Stručni uvidi o papirnim proizvodima, održivosti i upravljanju objektima.',
+  'blog.readMore': 'Pročitaj više',
+  'blog.readingTime': '{minutes} min čitanja',
+  'blog.publishedOn': 'Objavljeno',
+  'blog.updatedOn': 'Ažurirano',
+  'blog.byAuthor': 'Autor: {author}',
+  'blog.category': 'Kategorija',
+  'blog.tags': 'Oznake',
+  'blog.relatedProducts': 'Povezani proizvodi',
+  'blog.relatedPosts': 'Možda vas zanima',
+  'blog.allPosts': 'Svi članci',
+  'blog.featured': 'Istaknuti članci',
+  'blog.noResults': 'Nema pronađenih članaka.',
+  'blog.searchPlaceholder': 'Pretraži članak e...',
 };

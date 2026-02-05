@@ -5,6 +5,8 @@ import { useCart } from '../../context/CartContext';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { getRegularProducts, isShopifyConfigured } from '../../lib/shopify';
 import type { Product } from '../../types/shopify';
+import SEOHead from '../seo/SEOHead';
+import { getCanonicalUrl } from '../../lib/seo';
 
 // Category definitions for filtering by tags
 const CATEGORIES = [
@@ -76,7 +78,23 @@ const ProductsPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-white min-h-screen">
+    <>
+      <SEOHead
+        title="Professional Paper Products | ZOR Professional"
+        description="Browse our full range of professional toilet paper, paper towels, Z-fold and V-fold products. Direct from manufacturer in Zagreb. Wholesale prices, whitelabel options available."
+        canonical={getCanonicalUrl('/products')}
+        keywords={[
+          'toilet paper wholesale',
+          'paper towels commercial',
+          'z-fold towels',
+          'v-fold towels',
+          'professional paper products',
+          'paper manufacturer',
+          'toaletni papir veleprodaja',
+          'profesionalni papir'
+        ]}
+      />
+      <div className="bg-white min-h-screen">
       {/* Page Header */}
       <div className="bg-gray-warm border-b border-gray-border">
         <div ref={headerRef} className="animate-fade-up max-w-7xl mx-auto px-6 lg:px-10 py-16">
@@ -168,6 +186,8 @@ const ProductsPage: React.FC = () => {
                       src={product.image}
                       alt={product.title}
                       className="w-full h-full object-contain p-4 hover:scale-105 transition-transform"
+                      loading="lazy"
+                      decoding="async"
                     />
                   ) : (
                     <span className="material-symbols-outlined text-primary/20 text-6xl">
@@ -226,6 +246,7 @@ const ProductsPage: React.FC = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

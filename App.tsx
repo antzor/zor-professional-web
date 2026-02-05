@@ -1,5 +1,6 @@
 import React from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { LanguageProvider } from './context/LanguageContext';
 import { CartProvider } from './context/CartContext';
 import Layout from './components/layout/Layout';
@@ -12,28 +13,34 @@ import ContactPage from './components/pages/ContactPage';
 import OutletPage from './components/pages/OutletPage';
 import CheckoutPage from './components/pages/CheckoutPage';
 import ProductDetailPage from './components/pages/ProductDetailPage';
+import BlogPage from './components/pages/BlogPage';
+import BlogPostPage from './components/pages/BlogPostPage';
 
 const App: React.FC = () => {
   return (
-    <LanguageProvider>
-      <CartProvider>
-        <HashRouter>
-          <Routes>
-            <Route element={<Layout />}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/products" element={<ProductsPage />} />
-              <Route path="/products/:handle" element={<ProductDetailPage />} />
-              <Route path="/outlet" element={<OutletPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/whitelabel" element={<WhitelabelPage />} />
-              <Route path="/faq" element={<FaqPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/checkout" element={<CheckoutPage />} />
-            </Route>
-          </Routes>
-        </HashRouter>
-      </CartProvider>
-    </LanguageProvider>
+    <HelmetProvider>
+      <LanguageProvider>
+        <CartProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/products" element={<ProductsPage />} />
+                <Route path="/products/:handle" element={<ProductDetailPage />} />
+                <Route path="/blog" element={<BlogPage />} />
+                <Route path="/blog/:slug" element={<BlogPostPage />} />
+                <Route path="/outlet" element={<OutletPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/whitelabel" element={<WhitelabelPage />} />
+                <Route path="/faq" element={<FaqPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/checkout" element={<CheckoutPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </CartProvider>
+      </LanguageProvider>
+    </HelmetProvider>
   );
 };
 

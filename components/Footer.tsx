@@ -27,6 +27,7 @@ const Footer: React.FC = () => {
           <h5 className="font-bold text-gray-900">{t('footer.quickLinks')}</h5>
           <nav className="flex flex-col gap-2">
             <Link className="text-gray-500 text-sm hover:text-primary transition-colors" to="/products">{t('nav.products')}</Link>
+            <Link className="text-gray-500 text-sm hover:text-primary transition-colors" to="/blog">{t('nav.blog')}</Link>
             <Link className="text-gray-500 text-sm hover:text-primary transition-colors" to="/about">{t('nav.about')}</Link>
             <Link className="text-gray-500 text-sm hover:text-primary transition-colors" to="/whitelabel">{t('nav.whitelabel')}</Link>
           </nav>
