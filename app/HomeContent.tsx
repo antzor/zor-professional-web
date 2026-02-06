@@ -15,6 +15,7 @@ interface HomeContentProps {
 export default function HomeContent({ homePage, categories, outletProducts }: HomeContentProps) {
   const { t, language } = useLanguage()
   const statsRef = useScrollAnimation()
+  const b2bRef = useScrollAnimation()
   const outletRef = useScrollAnimation()
   const catRef = useScrollAnimation()
   const whyRef = useScrollAnimation()
@@ -112,8 +113,59 @@ export default function HomeContent({ homePage, categories, outletProducts }: Ho
         </div>
       </section>
 
+      {/* B2B Section */}
+      <section className="bg-gray-warm py-16 lg:py-20 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -mr-32 -mt-32" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 rounded-full -ml-48 -mb-48" />
+
+        <div ref={b2bRef} className="animate-fade-up max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Left side - Image */}
+            <div className="order-2 lg:order-1">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-white aspect-[4/3]">
+                {homePage?.b2bImage ? (
+                  <img
+                    src={urlFor(homePage.b2bImage).width(800).height(600).url()}
+                    alt={l(homePage?.b2bTitleHr, homePage?.b2bTitleEn) || t('home.b2b.title')}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-primary/10 to-primary/20 flex items-center justify-center">
+                    <span className="material-symbols-outlined text-primary text-8xl">business</span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Right side - Content */}
+            <div className="order-1 lg:order-2">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="material-symbols-outlined text-primary text-2xl">handshake</span>
+                <span className="text-primary font-semibold text-sm uppercase tracking-wide">
+                  {t('home.b2b.badge')}
+                </span>
+              </div>
+              <h2 className="text-gray-900 text-3xl lg:text-4xl font-black tracking-tight mb-4">
+                {l(homePage?.b2bTitleHr, homePage?.b2bTitleEn) || t('home.b2b.title')}
+              </h2>
+              <p className="text-gray-600 text-lg leading-relaxed mb-8">
+                {l(homePage?.b2bSubtitleHr, homePage?.b2bSubtitleEn) || t('home.b2b.subtitle')}
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-light transition-all active:scale-95"
+              >
+                {l(homePage?.b2bCtaTextHr, homePage?.b2bCtaTextEn) || t('home.b2b.cta')}
+                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Product Categories */}
-      <section className="bg-white py-20 lg:py-24">
+      <section className="bg-red py-20 lg:py-24">
         <div ref={catRef} className="animate-fade-up max-w-7xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-12">
             <h2 className="text-gray-900 text-3xl lg:text-4xl font-black tracking-tight">

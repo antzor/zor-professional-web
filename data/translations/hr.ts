@@ -95,6 +95,12 @@ export const hr: Record<string, string> = {
   'home.cta.subtitle': 'Bilo da trebate puni kamion ili nekoliko kutija, imamo pravo rješenje za vaše poslovanje.',
   'home.cta.button': 'Kontaktirajte nas',
 
+  // B2B Section
+  'home.b2b.badge': 'B2B Rješenja',
+  'home.b2b.title': 'Profesionalna higijena za vaše poslovanje',
+  'home.b2b.subtitle': 'Kompletna rješenja za hotele, restorane i urede. Veleprodajne cijene i brza dostava na vašu adresu.',
+  'home.b2b.cta': 'Zatraži ponudu',
+
   // About page
   'about.title': 'O ZOR Professional',
   'about.subtitle': 'Naša priča',

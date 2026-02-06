@@ -95,6 +95,12 @@ export const en: Record<string, string> = {
   'home.cta.subtitle': 'Whether you need a full truck or a few cartons, we have the right solution for your business.',
   'home.cta.button': 'Get in Touch',
 
+  // B2B Section
+  'home.b2b.badge': 'B2B Solutions',
+  'home.b2b.title': 'Professional Hygiene for Your Business',
+  'home.b2b.subtitle': 'Complete solutions for hotels, restaurants, and offices. Wholesale prices and fast delivery to your location.',
+  'home.b2b.cta': 'Request a Quote',
+
   // About page
   'about.title': 'About ZOR Professional',
   'about.subtitle': 'Our Story',

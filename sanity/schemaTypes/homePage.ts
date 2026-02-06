@@ -6,6 +6,7 @@ export default defineType({
   type: 'document',
   groups: [
     { name: 'hero', title: 'Hero Section' },
+    { name: 'b2b', title: 'B2B Section' },
     { name: 'outlet', title: 'Outlet Section' },
     { name: 'categories', title: 'Categories Section' },
     { name: 'whyChoose', title: 'Why Choose Section' },
@@ -77,6 +78,53 @@ export default defineType({
           },
         },
       ],
+    }),
+
+    // B2B Section
+    defineField({
+      name: 'b2bTitleHr',
+      title: 'B2B Section Title (HR)',
+      type: 'string',
+      group: 'b2b',
+    }),
+    defineField({
+      name: 'b2bTitleEn',
+      title: 'B2B Section Title (EN)',
+      type: 'string',
+      group: 'b2b',
+    }),
+    defineField({
+      name: 'b2bSubtitleHr',
+      title: 'B2B Section Subtitle (HR)',
+      type: 'text',
+      rows: 3,
+      group: 'b2b',
+    }),
+    defineField({
+      name: 'b2bSubtitleEn',
+      title: 'B2B Section Subtitle (EN)',
+      type: 'text',
+      rows: 3,
+      group: 'b2b',
+    }),
+    defineField({
+      name: 'b2bImage',
+      title: 'B2B Section Image',
+      type: 'image',
+      options: { hotspot: true },
+      group: 'b2b',
+    }),
+    defineField({
+      name: 'b2bCtaTextHr',
+      title: 'B2B CTA Button Text (HR)',
+      type: 'string',
+      group: 'b2b',
+    }),
+    defineField({
+      name: 'b2bCtaTextEn',
+      title: 'B2B CTA Button Text (EN)',
+      type: 'string',
+      group: 'b2b',
     }),
 
     // Outlet Section
