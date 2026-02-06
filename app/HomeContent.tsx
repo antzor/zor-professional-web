@@ -112,76 +112,6 @@ export default function HomeContent({ homePage, categories, outletProducts }: Ho
         </div>
       </section>
 
-      {/* Outlet Section */}
-      <section className="bg-gray-warm py-16 lg:py-20 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full -ml-32 -mt-32" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/5 rounded-full -mr-48 -mb-48" />
-
-        <div ref={outletRef} className="animate-fade-up max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            {/* Left side - Featured Product */}
-            <div className="order-2 lg:order-1">
-              {topOutletDeal && (
-                <Link
-                  href="/outlet"
-                  className="block bg-white rounded-2xl p-6 border border-gray-border hover:shadow-xl transition-all hover:-translate-y-1 group"
-                >
-                  <div className="w-full aspect-square bg-gray-50 rounded-xl mb-4 flex items-center justify-center overflow-hidden relative">
-                    {topOutletDeal.images[0] ? (
-                      <img
-                        src={topOutletDeal.images[0].url}
-                        alt={topOutletDeal.title}
-                        className="w-full h-full object-contain p-6 group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <span className="material-symbols-outlined text-gray-300 text-6xl">inventory_2</span>
-                    )}
-                  </div>
-                  <h3 className="text-gray-900 font-bold text-lg leading-tight mb-2 group-hover:text-primary transition-colors">
-                    {topOutletDeal.title}
-                  </h3>
-                  <p className="text-gray-500 text-sm mb-3 line-clamp-2">
-                    {topOutletDeal.description}
-                  </p>
-                  <div className="flex items-baseline gap-3">
-                    <span className="text-primary font-black text-2xl">
-                      €{topOutletDeal.minPrice.toFixed(2)}
-                    </span>
-                  </div>
-                </Link>
-              )}
-            </div>
-
-            {/* Right side - Sustainability Story */}
-            <div className="order-1 lg:order-2">
-              <div className="flex items-center gap-2 mb-4">
-                <span className="material-symbols-outlined text-primary text-2xl">eco</span>
-                <span className="text-primary font-semibold text-sm uppercase tracking-wide">
-                  {t('home.outlet.sustainability')}
-                </span>
-              </div>
-              <h2 className="text-gray-900 text-3xl lg:text-4xl font-black tracking-tight mb-4">
-                {l(homePage?.outletSectionTitleHr, homePage?.outletSectionTitleEn) || t('home.outlet.title')}
-              </h2>
-              <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                {l(homePage?.outletSectionSubtitleHr, homePage?.outletSectionSubtitleEn) || t('home.outlet.subtitle')}
-              </p>
-              <p className="text-gray-500 text-base leading-relaxed mb-8">
-                {l(homePage?.outletSustainabilityHr, homePage?.outletSustainabilityEn) || t('home.outlet.sustainabilityDesc')}
-              </p>
-              <Link
-                href="/outlet"
-                className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-light transition-all active:scale-95"
-              >
-                {t('home.outlet.viewAll')}
-                <span className="material-symbols-outlined text-sm">arrow_forward</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Product Categories */}
       <section className="bg-white py-20 lg:py-24">
         <div ref={catRef} className="animate-fade-up max-w-7xl mx-auto px-6 lg:px-10">
@@ -244,8 +174,82 @@ export default function HomeContent({ homePage, categories, outletProducts }: Ho
         </div>
       </section>
 
+      {/* Outlet Section */}
+      <section className="bg-gray-warm py-16 lg:py-20 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full -ml-32 -mt-32" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/5 rounded-full -mr-48 -mb-48" />
+
+        <div ref={outletRef} className="animate-fade-up max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Left side - Featured Product */}
+            <div className="order-2 lg:order-1">
+              {topOutletDeal && (
+                <Link
+                  href="/outlet"
+                  className="block bg-white rounded-xl p-5 border border-gray-border hover:shadow-xl transition-all hover:-translate-y-1 group h-full"
+                >
+                  <div className="grid grid-cols-[140px_1fr] gap-4 items-center">
+                    <div className="w-[140px] h-[140px] bg-gray-50 rounded-lg flex items-center justify-center overflow-hidden shrink-0">
+                      {topOutletDeal.images[0] ? (
+                        <img
+                          src={topOutletDeal.images[0].url}
+                          alt={topOutletDeal.title}
+                          className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <span className="material-symbols-outlined text-gray-300 text-5xl">inventory_2</span>
+                      )}
+                    </div>
+                    <div className="flex flex-col justify-center">
+                      <h3 className="text-gray-900 font-bold text-lg leading-tight mb-2 group-hover:text-primary transition-colors">
+                        {topOutletDeal.title}
+                      </h3>
+                      <p className="text-gray-500 text-sm mb-3 line-clamp-2">
+                        {topOutletDeal.description}
+                      </p>
+                      <div className="flex items-baseline gap-3">
+                        <span className="text-primary font-black text-2xl">
+                          €{topOutletDeal.minPrice.toFixed(2)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              )}
+            </div>
+
+            {/* Right side - Sustainability Story */}
+            <div className="order-1 lg:order-2">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="material-symbols-outlined text-primary text-2xl">eco</span>
+                <span className="text-primary font-semibold text-sm uppercase tracking-wide">
+                  {t('home.outlet.sustainability')}
+                </span>
+              </div>
+              <h2 className="text-gray-900 text-3xl lg:text-4xl font-black tracking-tight mb-4">
+                {l(homePage?.outletSectionTitleHr, homePage?.outletSectionTitleEn) || t('home.outlet.title')}
+              </h2>
+              <p className="text-gray-600 text-lg leading-relaxed mb-6">
+                {l(homePage?.outletSectionSubtitleHr, homePage?.outletSectionSubtitleEn) || t('home.outlet.subtitle')}
+              </p>
+              <p className="text-gray-500 text-base leading-relaxed mb-8">
+                {l(homePage?.outletSustainabilityHr, homePage?.outletSustainabilityEn) || t('home.outlet.sustainabilityDesc')}
+              </p>
+              <Link
+                href="/outlet"
+                className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-light transition-all active:scale-95"
+              >
+                {t('home.outlet.viewAll')}
+                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose ZOR */}
-      <section className="bg-gray-warm py-20 lg:py-24">
+      <section className="bg-white py-20 lg:py-24">
         <div ref={whyRef} className="animate-fade-up max-w-7xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-14">
             <h2 className="text-gray-900 text-3xl lg:text-4xl font-black tracking-tight">
