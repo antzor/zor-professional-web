@@ -35,6 +35,43 @@ const PRODUCTS_QUERY = `
   }
 `
 
+const COLLECTION_PRODUCTS_QUERY = `
+  query CollectionProducts($handle: String!, $first: Int!) {
+    collectionByHandle(handle: $handle) {
+      products(first: $first) {
+        edges {
+          node {
+            id
+            title
+            handle
+            description
+            tags
+            priceRange {
+              minVariantPrice { amount currencyCode }
+            }
+            images(first: 5) {
+              edges {
+                node { url altText width height }
+              }
+            }
+            variants(first: 20) {
+              edges {
+                node {
+                  id
+                  title
+                  price { amount currencyCode }
+                  availableForSale
+                  image { url altText }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
 const PRODUCT_BY_HANDLE_QUERY = `
   query ProductByHandle($handle: String!) {
     productByHandle(handle: $handle) {
@@ -153,12 +190,16 @@ export async function getProductByHandle(handle: string): Promise<ShopifyProduct
   return transformProductDetail(data.productByHandle)
 }
 
+export async function getProductsByCollection(handle: string, first: number = 50): Promise<ShopifyProduct[]> {
+  const data = await shopifyFetch<any>(COLLECTION_PRODUCTS_QUERY, { handle, first })
+  if (!data.collectionByHandle) return []
+  return data.collectionByHandle.products.edges.map((edge: any) => transformProduct(edge.node))
+}
+
 export async function getRegularProducts(): Promise<ShopifyProduct[]> {
-  const products = await getProducts()
-  return products.filter((p) => !p.tags.includes('outlet'))
+  return getProductsByCollection('original')
 }
 
 export async function getOutletProducts(): Promise<ShopifyProduct[]> {
-  const products = await getProducts()
-  return products.filter((p) => p.tags.includes('outlet'))
+  return getProductsByCollection('outlet')
 }
