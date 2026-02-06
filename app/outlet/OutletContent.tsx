@@ -6,8 +6,19 @@ import { useCart } from '@/providers/CartProvider'
 import { useScrollAnimation } from '@/app/components/hooks/useScrollAnimation'
 import type { ShopifyProduct } from '@/lib/shopify/products'
 
-export default function OutletContent({ products }: { products: ShopifyProduct[] }) {
-  const { t } = useLanguage()
+interface Banner {
+  titleHr?: string
+  titleEn?: string
+  subtitleHr?: string
+  subtitleEn?: string
+  ctaTextHr?: string
+  ctaTextEn?: string
+  ctaLink?: string
+}
+
+export default function OutletContent({ products, banner }: { products: ShopifyProduct[]; banner?: Banner | null }) {
+  const { t, language } = useLanguage()
+  const l = (hr?: string, en?: string) => language === 'hr' ? hr : en
   const { addItem, isLoading: cartLoading } = useCart()
   const headerRef = useScrollAnimation()
   const infoRef = useScrollAnimation()
@@ -109,6 +120,26 @@ export default function OutletContent({ products }: { products: ShopifyProduct[]
                 </div>
               </div>
             ))}
+          </div>
+        )}
+
+        {/* Promo Banner */}
+        {banner && (
+          <div className="mt-12 bg-gradient-to-r from-primary to-primary-light rounded-xl p-8 lg:p-10 text-white">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div>
+                <h3 className="text-2xl font-black mb-2">{l(banner.titleHr, banner.titleEn)}</h3>
+                <p className="text-white/80 max-w-lg">{l(banner.subtitleHr, banner.subtitleEn)}</p>
+              </div>
+              {banner.ctaLink && (
+                <Link
+                  href={banner.ctaLink}
+                  className="shrink-0 bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                >
+                  {l(banner.ctaTextHr, banner.ctaTextEn)}
+                </Link>
+              )}
+            </div>
           </div>
         )}
       </div>

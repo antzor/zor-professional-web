@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
 import { getProductByHandle } from '@/lib/shopify/products'
 import { fetchProductContentByHandle } from '@/lib/sanity/fetch'
-import ProductDetailContent from './ProductDetailContent'
+import StandardProductContent from './StandardProductContent'
+import OutletProductContent from './OutletProductContent'
 import Link from 'next/link'
 
 interface Props {
@@ -40,5 +41,29 @@ export default async function ProductDetailPage({ params }: Props) {
     )
   }
 
-  return <ProductDetailContent product={product} content={content} />
+  const isOutlet = product.tags.some((tag) => tag.toLowerCase() === 'outlet')
+
+  if (isOutlet) {
+    return <OutletProductContent product={product} content={content} />
+  }
+
+  // For standard products, resolve frequently bought together products
+  let relatedProducts: any[] = []
+  if (content?.frequentlyBoughtWith?.length) {
+    relatedProducts = (
+      await Promise.all(
+        content.frequentlyBoughtWith
+          .slice(0, 4)
+          .map((h: string) => getProductByHandle(h).catch(() => null))
+      )
+    ).filter(Boolean)
+  }
+
+  return (
+    <StandardProductContent
+      product={product}
+      content={content}
+      relatedProducts={relatedProducts}
+    />
+  )
 }
