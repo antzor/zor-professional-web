@@ -30,13 +30,19 @@ const Header: React.FC<HeaderProps> = ({ navigation }) => {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   const isHomepage = pathname === '/'
   const transparent = isHomepage
 
   useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
     if (!transparent) return
     const handleScroll = () => setScrolled(window.scrollY > 50)
+    handleScroll()
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [transparent])
@@ -62,12 +68,16 @@ const Header: React.FC<HeaderProps> = ({ navigation }) => {
   const ctaLink = navigation?.ctaButtonLink || '/contact'
 
   const isActive = (path: string) => pathname === path
-  const isSolid = !transparent || scrolled
+
+  // On server/before mount: always render solid to avoid flash of unstyled content
+  const isSolid = !mounted || !transparent || scrolled
 
   return (
     <>
       <header
-        className={`${transparent ? 'absolute top-0 left-0 right-0' : 'sticky top-0'} z-40 transition-all duration-300 ${
+        className={`${transparent ? 'absolute top-0 left-0 right-0' : 'sticky top-0'} z-40 ${
+          mounted ? 'transition-colors duration-300' : ''
+        } ${
           isSolid
             ? 'bg-white/95 backdrop-blur-sm border-b border-gray-border'
             : 'bg-transparent border-b border-transparent'
@@ -115,7 +125,9 @@ const Header: React.FC<HeaderProps> = ({ navigation }) => {
               }`}
               aria-label="Cart"
             >
-              <span className="material-symbols-outlined">shopping_cart</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" /><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+              </svg>
               {totalItems > 0 && (
                 <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
                   {totalItems > 9 ? '9+' : totalItems}
@@ -135,7 +147,13 @@ const Header: React.FC<HeaderProps> = ({ navigation }) => {
               className={`lg:hidden flex items-center justify-center w-10 h-10 ${isSolid ? 'text-gray-700' : 'text-white'}`}
               aria-label="Menu"
             >
-              <span className="material-symbols-outlined text-2xl">{mobileOpen ? 'close' : 'menu'}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+                {mobileOpen ? (
+                  <><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></>
+                ) : (
+                  <><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="18" x2="21" y2="18" /></>
+                )}
+              </svg>
             </button>
           </div>
         </div>
@@ -148,7 +166,9 @@ const Header: React.FC<HeaderProps> = ({ navigation }) => {
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-border">
               <span className="text-lg font-bold text-primary">Menu</span>
               <button onClick={() => setMobileOpen(false)} className="text-gray-500">
-                <span className="material-symbols-outlined">close</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+                  <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
               </button>
             </div>
             <nav className="flex flex-col py-4">
