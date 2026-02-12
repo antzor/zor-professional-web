@@ -243,8 +243,8 @@ export const ABOUT_PAGE_QUERY = `*[_type == "aboutPage"][0] {
   metaDescriptionEn
 }`
 
-// Whitelabel Page (singleton)
-export const WHITELABEL_PAGE_QUERY = `*[_type == "whitelabelPage"][0] {
+// Private Label Page (singleton)
+export const PRIVATE_LABEL_PAGE_QUERY = `*[_type == "privateLabelPage"][0] {
   titleHr,
   titleEn,
   subtitleHr,

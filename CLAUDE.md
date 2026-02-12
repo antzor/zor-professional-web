@@ -11,7 +11,7 @@ Instructions for AI assistants working on this project.
 - **Type**: E-commerce website with CMS
 - **Company**: Zagreb-based manufacturer of toilet paper, paper towels, and folded paper solutions
 - **Target audience**: Distributors across Europe
-- **Products**: Branded and whitelabel paper products
+- **Products**: Branded and private label paper products
 
 ---
 

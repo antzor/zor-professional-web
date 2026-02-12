@@ -1,8 +1,8 @@
 import { defineType, defineField } from 'sanity'
 
 export default defineType({
-  name: 'whitelabelPage',
-  title: 'Whitelabel Page',
+  name: 'privateLabelPage',
+  title: 'Private Label Page',
   type: 'document',
   fields: [
     defineField({
@@ -126,7 +126,7 @@ export default defineType({
   ],
   preview: {
     prepare() {
-      return { title: 'Whitelabel Page' }
+      return { title: 'Private Label Page' }
     },
   },
 })

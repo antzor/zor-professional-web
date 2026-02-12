@@ -57,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({ navigation }) => {
     { to: '/blog', label: t('nav.blog'), highlight: false },
     { to: '/outlet', label: t('nav.outlet'), highlight: true },
     { to: '/about', label: t('nav.about'), highlight: false },
-    { to: '/whitelabel', label: t('nav.whitelabel'), highlight: false },
+    { to: '/private-label', label: t('nav.whitelabel'), highlight: false },
     { to: '/faq', label: t('nav.faq'), highlight: false },
     { to: '/contact', label: t('nav.contact'), highlight: false },
   ]

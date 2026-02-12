@@ -4,7 +4,7 @@ import {
   NAVIGATION_QUERY,
   HOME_PAGE_QUERY,
   ABOUT_PAGE_QUERY,
-  WHITELABEL_PAGE_QUERY,
+  PRIVATE_LABEL_PAGE_QUERY,
   CONTACT_PAGE_QUERY,
   PRODUCT_CATEGORIES_QUERY,
   ALL_BLOG_POSTS_QUERY,
@@ -42,9 +42,9 @@ export async function fetchAboutPage() {
   return sanityClient.fetch(ABOUT_PAGE_QUERY, {}, { next: { revalidate: REVALIDATE_LONG } })
 }
 
-// Whitelabel Page
-export async function fetchWhitelabelPage() {
-  return sanityClient.fetch(WHITELABEL_PAGE_QUERY, {}, { next: { revalidate: REVALIDATE_LONG } })
+// Private Label Page
+export async function fetchPrivateLabelPage() {
+  return sanityClient.fetch(PRIVATE_LABEL_PAGE_QUERY, {}, { next: { revalidate: REVALIDATE_LONG } })
 }
 
 // Contact Page

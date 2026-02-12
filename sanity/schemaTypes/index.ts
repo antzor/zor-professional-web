@@ -5,7 +5,7 @@ import banner from './banner'
 import siteSettings from './siteSettings'
 import homePage from './homePage'
 import aboutPage from './aboutPage'
-import whitelabelPage from './whitelabelPage'
+import privateLabelPage from './privateLabelPage'
 import contactPage from './contactPage'
 import navigation from './navigation'
 import productCategory from './productCategory'
@@ -18,7 +18,7 @@ export const schemaTypes = [
   siteSettings,
   homePage,
   aboutPage,
-  whitelabelPage,
+  privateLabelPage,
   contactPage,
   navigation,
   productCategory,

@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { route: '/about', changeFrequency: 'monthly' as const, priority: 0.7 },
     { route: '/contact', changeFrequency: 'monthly' as const, priority: 0.8 },
     { route: '/faq', changeFrequency: 'monthly' as const, priority: 0.6 },
-    { route: '/whitelabel', changeFrequency: 'monthly' as const, priority: 0.7 },
+    { route: '/private-label', changeFrequency: 'monthly' as const, priority: 0.7 },
     { route: '/outlet', changeFrequency: 'weekly' as const, priority: 0.8 },
     { route: '/blog', changeFrequency: 'weekly' as const, priority: 0.7 },
   ]

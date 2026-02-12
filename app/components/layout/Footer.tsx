@@ -56,7 +56,7 @@ const Footer: React.FC<FooterProps> = ({ siteSettings }) => {
             <Link className="text-gray-500 text-sm hover:text-primary transition-colors" href="/products">{t('nav.products')}</Link>
             <Link className="text-gray-500 text-sm hover:text-primary transition-colors" href="/blog">{t('nav.blog')}</Link>
             <Link className="text-gray-500 text-sm hover:text-primary transition-colors" href="/about">{t('nav.about')}</Link>
-            <Link className="text-gray-500 text-sm hover:text-primary transition-colors" href="/whitelabel">{t('nav.whitelabel')}</Link>
+            <Link className="text-gray-500 text-sm hover:text-primary transition-colors" href="/private-label">{t('nav.whitelabel')}</Link>
           </nav>
         </div>
 

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useLanguage } from '@/providers/LanguageProvider'
 import { useScrollAnimation } from '@/app/components/hooks/useScrollAnimation'
 
-interface WhitelabelData {
+interface PrivateLabelData {
   titleHr?: string
   titleEn?: string
   subtitleHr?: string
@@ -26,7 +26,7 @@ interface WhitelabelData {
   ctaButtonLink?: string
 }
 
-export default function WhitelabelContent({ data }: { data: WhitelabelData | null }) {
+export default function PrivateLabelContent({ data }: { data: PrivateLabelData | null }) {
   const { t, language } = useLanguage()
   const headerRef = useScrollAnimation()
   const stepsRef = useScrollAnimation()
