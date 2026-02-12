@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useLanguage } from '@/providers/LanguageProvider'
 
 interface FooterProps {
@@ -41,11 +42,14 @@ const Footer: React.FC<FooterProps> = ({ siteSettings }) => {
     <footer className="bg-gray-warm border-t border-gray-border py-16 px-6 lg:px-10">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
         <div className="flex flex-col gap-4">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-black text-sm">Z</span>
-            </div>
-            <span className="text-lg font-bold text-primary">ZOR Professional</span>
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/images/logo.png"
+              alt="ZOR Professional"
+              width={160}
+              height={40}
+              className="h-8 w-auto"
+            />
           </Link>
           <p className="text-gray-500 text-sm leading-relaxed">{description}</p>
         </div>

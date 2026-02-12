@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useLanguage } from '@/providers/LanguageProvider'
 import { useCart } from '@/providers/CartProvider'
@@ -85,12 +86,14 @@ const Header: React.FC<HeaderProps> = ({ navigation }) => {
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-10 py-4">
           <Link href="/" className="flex items-center gap-3" onClick={() => setMobileOpen(false)}>
-            <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${isSolid ? 'bg-primary' : 'bg-white'}`}>
-              <span className={`font-black text-lg ${isSolid ? 'text-white' : 'text-primary'}`}>Z</span>
-            </div>
-            <span className={`text-xl font-bold tracking-tight ${isSolid ? 'text-primary' : 'text-white'}`}>
-              ZOR Professional
-            </span>
+            <Image
+              src="/images/logo.png"
+              alt="ZOR Professional"
+              width={180}
+              height={45}
+              className="h-10 w-auto"
+              priority
+            />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8">
